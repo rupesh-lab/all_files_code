@@ -1,0 +1,10 @@
+Algo for sit to givein metro:
+priorities on the basis of:
+1) Age
+2) Gender
+3) Health
+4) Distance/Stations
+5) new/old Passenger
+
+Algo for purchasing Product from market:
+1) 

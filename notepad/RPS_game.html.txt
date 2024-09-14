@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #zero{color:deeppink;background-color: aqua;}
+        #first{color:red;background-color: greenyellow;}
+        #second{color:red;background-color:greenyellow ;}
+    </style>
+</head>
+<body>
+    <h1 id="zero">stone paper scissor game</h1>
+    
+    <button onclick="playGame('stone')">Stone</button>
+    <button onclick="playGame('paper')">Paper</button>
+    <button onclick="playGame('scissor')">Scissor</button>
+
+    <h1 id="first"></h1>
+    <h1 id="second"></h1>
+
+<script>
+    let score = {
+        win: 0,
+        lost: 0,
+        tie: 0,
+    };
+    let n = 0;
+    let x = 0;
+    document.querySelector('#first').innerText = 'computer: ' + n;
+    document.querySelector('#second').innerText = 'user: ' + x;
+
+    function generate() {
+        let R = Math.random() * 3;
+        if (R > 0 && R <= 1) {
+            return 'stone';
+        } else if (R > 1 && R <= 2) {
+            return 'paper';
+        } else {
+            return 'scissor';
+        }
+    }
+
+    function userpoint() {
+        n--;
+        document.querySelector('#first').innerText = 'computer: ' + n;
+        x++;
+        document.querySelector('#second').innerText = 'user: ' + x;
+    }
+
+    function computerpoint() {
+        n++;
+        document.querySelector('#first').innerText = 'computer: ' + n;
+        x--;
+        document.querySelector('#second').innerText = 'user: ' + x;
+    }
+
+    function playGame(userChoice) {
+        alert('You have chosen ' + userChoice);
+        let CC = generate();
+        let result;
+        if (userChoice === 'stone') {
+            if (CC === 'paper') {
+                result = 'Computer won.';
+                computerpoint();
+                score.lost++;
+            } else if (CC === 'stone') {
+                result = 'Tie';
+                score.tie++;
+            } else {
+                result = 'User won';
+                userpoint();
+                score.win++;
+            }
+        } else if (userChoice === 'paper') {
+            if (CC === 'paper') {
+                result = 'Tie';
+                score.tie++;
+            } else if (CC === 'stone') {
+                result = 'User won';
+                userpoint();
+                score.win++;
+            } else {
+                result = 'Computer won';
+                computerpoint();
+                score.lost++;
+            }
+        } else if (userChoice === 'scissor') {
+            if (CC === 'paper') {
+                result = 'User won.';
+                userpoint();
+                score.win++;
+            } else if (CC === 'scissor') {
+                result = 'Tie';
+                score.tie++;
+            } else {
+                result = 'Computer won';
+                computerpoint();
+                score.lost++;
+            }
+        }
+        alerts(CC, result);
+    }
+
+    function alerts(CC, result) {
+        console.log(score);
+        alert('Computer choice is ' + CC);
+        alert(result);
+        alert('Won: ' + score.win + ' Lost: ' + score.lost + ' Tie: ' + score.tie);
+    }
+</script>
+</body>
+</html>

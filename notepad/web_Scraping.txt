@@ -1,0 +1,32 @@
+import pandas as pd
+from bs4 import BeautifulSoup
+
+# Step 1: Open the local HTML file and read its content
+with open('example4.html', 'r', encoding='utf-8') as file:
+    html_content = file.read()
+
+# Step 2: Parse the HTML content using BeautifulSoup
+soup = BeautifulSoup(html_content, 'html.parser')
+
+# Step 3: Find all <div> tags with the specified class
+b = soup.find_all('div', class_='xrotator-thumbs-item xrotator-thumbs-item-x1 thumb')
+
+# Step 4: Loop through each <div> tag
+for i in b:  # Corrected to loop over a single variable
+    # Find the <a> with the specific class inside the parent <div> tag
+    y = i.find('a', class_='thumb__link js-pop js-newtab')
+
+    # Find the <div> with the specific class inside the parent <div> tag
+    x = i.find('div', class_='xrotator-thumbs-item-data')
+
+    if x:
+        spans = x.find_all('span')
+        if len(spans) > 0:  # Check if at least one <span> is present
+            print(spans[0].text)  # Print the text of the first <span>
+
+    if y:
+        span=y.find('span', class_='thumb__img-wrapper')
+        if span: 
+            img=span.find('img', class_='thumb__img')
+            print(img['data-src'])
+                
